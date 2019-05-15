@@ -1,4 +1,4 @@
-package com.bfxy.disruptor;
+package com.pikaqiu.disruptor;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -75,7 +75,7 @@ public class RingBufferWorkerPoolFactory {
 	
 	/**
 	 * 异常静态类
-	 * @author Alienware
+	 * @author xiaoye
 	 *
 	 */
 	static class EventExceptionHandler implements ExceptionHandler<TranslatorDataWapper> {

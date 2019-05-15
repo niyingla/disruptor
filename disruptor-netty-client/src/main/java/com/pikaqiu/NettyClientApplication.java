@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.bfxy.client.MessageConsumerImpl4Client;
 import com.bfxy.client.NettyClient;
-import com.bfxy.disruptor.MessageConsumer;
-import com.bfxy.disruptor.RingBufferWorkerPoolFactory;
+import com.pikaqiu.disruptor.MessageConsumer;
+import com.pikaqiu.disruptor.RingBufferWorkerPoolFactory;
 import com.lmax.disruptor.BlockingWaitStrategy;
-import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.ProducerType;
 
 @SpringBootApplication

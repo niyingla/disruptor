@@ -1,10 +1,10 @@
-package com.bfxy.disruptor;
+package com.pikaqiu.disruptor;
 
 import com.bfxy.entity.TranslatorDataWapper;
 import com.lmax.disruptor.WorkHandler;
 
 /**
- * @author Alienware
+ * @author xiaoye
  *
  */
 public abstract class MessageConsumer implements WorkHandler<TranslatorDataWapper> {

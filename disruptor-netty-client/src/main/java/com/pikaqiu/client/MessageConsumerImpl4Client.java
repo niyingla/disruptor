@@ -1,6 +1,6 @@
 package com.bfxy.client;
 
-import com.bfxy.disruptor.MessageConsumer;
+import com.pikaqiu.disruptor.MessageConsumer;
 import com.bfxy.entity.TranslatorData;
 import com.bfxy.entity.TranslatorDataWapper;
 

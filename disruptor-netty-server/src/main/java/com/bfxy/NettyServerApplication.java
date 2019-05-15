@@ -3,12 +3,11 @@ package com.bfxy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.bfxy.disruptor.MessageConsumer;
-import com.bfxy.disruptor.RingBufferWorkerPoolFactory;
+import com.pikaqiu.disruptor.MessageConsumer;
+import com.pikaqiu.disruptor.RingBufferWorkerPoolFactory;
 import com.bfxy.server.MessageConsumerImpl4Server;
 import com.bfxy.server.NettyServer;
 import com.lmax.disruptor.BlockingWaitStrategy;
-import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.ProducerType;
 
 @SpringBootApplication

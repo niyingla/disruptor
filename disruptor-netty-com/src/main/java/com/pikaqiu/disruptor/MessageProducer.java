@@ -1,4 +1,4 @@
-package com.bfxy.disruptor;
+package com.pikaqiu.disruptor;
 
 import com.bfxy.entity.TranslatorData;
 import com.bfxy.entity.TranslatorDataWapper;
