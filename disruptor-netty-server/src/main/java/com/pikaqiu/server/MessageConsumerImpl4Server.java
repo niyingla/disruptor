@@ -1,9 +1,8 @@
-package com.bfxy.server;
+package com.pikaqiu.server;
 
 import com.pikaqiu.disruptor.MessageConsumer;
-import com.bfxy.entity.TranslatorData;
-import com.bfxy.entity.TranslatorDataWapper;
-
+import com.pikaqiu.entity.TranslatorData;
+import com.pikaqiu.entity.TranslatorDataWapper;
 import io.netty.channel.ChannelHandlerContext;
 
 public class MessageConsumerImpl4Server extends MessageConsumer {
@@ -14,7 +13,7 @@ public class MessageConsumerImpl4Server extends MessageConsumer {
 
 	@Override
 	public void onEvent(TranslatorDataWapper event) throws Exception {
-		TranslatorData request = event.getData();
+		com.pikaqiu.entity.TranslatorData request = event.getData();
 		ChannelHandlerContext ctx = event.getCtx();
 		//1.业务处理逻辑:
     	System.err.println("Sever端: id= " + request.getId() 

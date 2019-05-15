@@ -1,4 +1,4 @@
-package com.bfxy.entity;
+package com.pikaqiu.entity;
 
 import io.netty.channel.ChannelHandlerContext;
 

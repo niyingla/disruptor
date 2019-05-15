@@ -1,9 +1,8 @@
 package com.bfxy.client;
 
 import com.pikaqiu.disruptor.MessageConsumer;
-import com.bfxy.entity.TranslatorData;
-import com.bfxy.entity.TranslatorDataWapper;
-
+import com.pikaqiu.entity.TranslatorData;
+import com.pikaqiu.entity.TranslatorDataWapper;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.ReferenceCountUtil;
 

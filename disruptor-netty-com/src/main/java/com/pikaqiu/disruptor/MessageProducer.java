@@ -1,9 +1,8 @@
 package com.pikaqiu.disruptor;
 
-import com.bfxy.entity.TranslatorData;
-import com.bfxy.entity.TranslatorDataWapper;
 import com.lmax.disruptor.RingBuffer;
-
+import com.pikaqiu.entity.TranslatorData;
+import com.pikaqiu.entity.TranslatorDataWapper;
 import io.netty.channel.ChannelHandlerContext;
 
 public class MessageProducer {

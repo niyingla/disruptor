@@ -1,4 +1,4 @@
-package com.bfxy.entity;
+package com.pikaqiu.entity;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 package com.pikaqiu.disruptor;
 
-import com.bfxy.entity.TranslatorDataWapper;
 import com.lmax.disruptor.WorkHandler;
+import com.pikaqiu.entity.TranslatorDataWapper;
 
 /**
  * @author xiaoye
