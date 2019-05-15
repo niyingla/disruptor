@@ -1,17 +1,12 @@
 package com.pikaqiu.disruptor;
 
+import com.lmax.disruptor.*;
+import com.lmax.disruptor.dsl.ProducerType;
+import com.pikaqiu.entity.TranslatorDataWapper;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
-
-import com.bfxy.entity.TranslatorDataWapper;
-import com.lmax.disruptor.EventFactory;
-import com.lmax.disruptor.ExceptionHandler;
-import com.lmax.disruptor.RingBuffer;
-import com.lmax.disruptor.SequenceBarrier;
-import com.lmax.disruptor.WaitStrategy;
-import com.lmax.disruptor.WorkerPool;
-import com.lmax.disruptor.dsl.ProducerType;
 
 public class RingBufferWorkerPoolFactory {
 
@@ -41,6 +36,7 @@ public class RingBufferWorkerPoolFactory {
 		//1. 构建ringBuffer对象
 		this.ringBuffer = RingBuffer.create(type,
 				new EventFactory<TranslatorDataWapper>() {
+			@Override
 					public TranslatorDataWapper newInstance() {
 						return new TranslatorDataWapper();
 					}
@@ -55,7 +51,7 @@ public class RingBufferWorkerPoolFactory {
 				new EventExceptionHandler(), messageConsumers);
 		//4 把所构建的消费者置入池中
 		for(MessageConsumer mc : messageConsumers){
-			this.consumers.put(mc.getConsumerId(), mc);
+			consumers.put(mc.getConsumerId(), mc);
 		}
 		//5 添加我们的sequences
 		this.ringBuffer.addGatingSequences(this.workerPool.getWorkerSequences());
@@ -64,10 +60,10 @@ public class RingBufferWorkerPoolFactory {
 	}
 	
 	public MessageProducer getMessageProducer(String producerId){
-		MessageProducer messageProducer = this.producers.get(producerId);
+		MessageProducer messageProducer = producers.get(producerId);
 		if(null == messageProducer) {
 			messageProducer = new MessageProducer(producerId, this.ringBuffer);
-			this.producers.put(producerId, messageProducer);
+			producers.put(producerId, messageProducer);
 		}
 		return messageProducer;
 	}
@@ -79,12 +75,14 @@ public class RingBufferWorkerPoolFactory {
 	 *
 	 */
 	static class EventExceptionHandler implements ExceptionHandler<TranslatorDataWapper> {
+		@Override
 		public void handleEventException(Throwable ex, long sequence, TranslatorDataWapper event) {
 		}
 
+		@Override
 		public void handleOnStartException(Throwable ex) {
 		}
-
+		@Override
 		public void handleOnShutdownException(Throwable ex) {
 		}
 	}

@@ -1,9 +1,8 @@
-package com.bfxy.server;
+package com.pikaqiu.server;
 
 import com.pikaqiu.disruptor.MessageProducer;
 import com.pikaqiu.disruptor.RingBufferWorkerPoolFactory;
-import com.bfxy.entity.TranslatorData;
-
+import com.pikaqiu.entity.TranslatorData;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

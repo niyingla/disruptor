@@ -1,9 +1,9 @@
 package com.pikaqiu.disruptor.heigh.multi;
 
+import com.lmax.disruptor.WorkHandler;
+
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import com.lmax.disruptor.WorkHandler;
 
 public class Consumer implements WorkHandler<Order> {
 
@@ -17,6 +17,7 @@ public class Consumer implements WorkHandler<Order> {
 		this.comsumerId = comsumerId;
 	}
 
+	@Override
 	public void onEvent(Order event) throws Exception {
 		Thread.sleep(1 * random.nextInt(5));
 		System.err.println("当前消费者: " + this.comsumerId + ", 消费信息ID: " + event.getId());
