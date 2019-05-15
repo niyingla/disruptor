@@ -12,7 +12,7 @@ public class ArrayBlockingQueue4Test {
 
             public void run() {
                 long i = 0;
-                while (i < Constants.EVENT_NUM_OHM) {
+                while (i < Constants.EVENT_NUM_OM) {
                 	Data data = new Data(i, "c" + i);
                     try {
                         queue.put(data);
@@ -27,7 +27,7 @@ public class ArrayBlockingQueue4Test {
         new Thread(new Runnable() {
             public void run() {
                 int k = 0;
-                while (k < Constants.EVENT_NUM_OHM) {
+                while (k < Constants.EVENT_NUM_OM) {
                     try {
                         queue.take();
                     } catch (InterruptedException e) {
