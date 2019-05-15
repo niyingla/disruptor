@@ -1,4 +1,4 @@
-package com.bfxy.codec;
+package com.pikaqiu.codec;
 
 import io.netty.handler.codec.marshalling.DefaultMarshallerProvider;
 import io.netty.handler.codec.marshalling.DefaultUnmarshallerProvider;

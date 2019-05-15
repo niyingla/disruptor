@@ -1,6 +1,6 @@
 package com.pikaqiu.client;
 
-import com.bfxy.codec.MarshallingCodeCFactory;
+import com.pikaqiu.codec.MarshallingCodeCFactory;
 import com.pikaqiu.entity.TranslatorData;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;

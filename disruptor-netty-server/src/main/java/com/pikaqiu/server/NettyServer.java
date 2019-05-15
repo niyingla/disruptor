@@ -1,6 +1,7 @@
 package com.pikaqiu.server;
 
 
+import com.pikaqiu.codec.MarshallingCodeCFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.*;
@@ -31,8 +32,8 @@ public class NettyServer {
 			.childHandler(new ChannelInitializer<SocketChannel>() {
 				@Override
 				protected void initChannel(SocketChannel sc) throws Exception {
-					sc.pipeline().addLast(com.bfxy.codec.MarshallingCodeCFactory.buildMarshallingDecoder());
-					sc.pipeline().addLast(com.bfxy.codec.MarshallingCodeCFactory.buildMarshallingEncoder());
+					sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
+					sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
 					sc.pipeline().addLast(new ServerHandler());
 				}
 			});
