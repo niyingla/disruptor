@@ -1,4 +1,4 @@
-package com.bfxy.disruptor;
+package com.pikaqiu.disruptor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
