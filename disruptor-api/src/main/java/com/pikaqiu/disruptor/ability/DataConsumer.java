@@ -11,6 +11,7 @@ public class DataConsumer implements EventHandler<Data> {
         this.startTime = System.currentTimeMillis();
     }
 
+    @Override
     public void onEvent(Data data, long seq, boolean bool)
             throws Exception {
         i++;

@@ -1,12 +1,12 @@
 package com.pikaqiu.disruptor.ability;
 
-import java.util.concurrent.Executors;
-
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
+
+import java.util.concurrent.Executors;
 
 public class DisruptorSingle4Test {
 
@@ -14,7 +14,8 @@ public class DisruptorSingle4Test {
         int ringBufferSize = 65536;
         final Disruptor<Data> disruptor = new Disruptor<Data>(
                  new EventFactory<Data>() {
-					public Data newInstance() {
+					@Override
+                    public Data newInstance() {
 						return new Data();
 					}
 				},
@@ -31,6 +32,7 @@ public class DisruptorSingle4Test {
         disruptor.start();
         new Thread(new Runnable() {
 
+            @Override
             public void run() {
                 RingBuffer<Data> ringBuffer = disruptor.getRingBuffer();
                 for (long i = 0; i < Constants.EVENT_NUM_OHM; i++) {
