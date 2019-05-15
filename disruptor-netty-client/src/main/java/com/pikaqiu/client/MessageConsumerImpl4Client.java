@@ -1,4 +1,4 @@
-package com.bfxy.client;
+package com.pikaqiu.client;
 
 import com.pikaqiu.disruptor.MessageConsumer;
 import com.pikaqiu.entity.TranslatorData;

@@ -1,14 +1,13 @@
-package com.bfxy;
+package com.pikaqiu;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.bfxy.client.MessageConsumerImpl4Client;
-import com.bfxy.client.NettyClient;
-import com.pikaqiu.disruptor.MessageConsumer;
-import com.pikaqiu.disruptor.RingBufferWorkerPoolFactory;
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.dsl.ProducerType;
+import com.pikaqiu.client.MessageConsumerImpl4Client;
+import com.pikaqiu.client.NettyClient;
+import com.pikaqiu.disruptor.MessageConsumer;
+import com.pikaqiu.disruptor.RingBufferWorkerPoolFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NettyClientApplication {
