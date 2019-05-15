@@ -12,6 +12,7 @@ public class MessageConsumerImpl4Server extends MessageConsumer {
 		super(consumerId);
 	}
 
+	@Override
 	public void onEvent(TranslatorDataWapper event) throws Exception {
 		TranslatorData request = event.getData();
 		ChannelHandlerContext ctx = event.getCtx();
