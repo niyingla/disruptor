@@ -1,4 +1,4 @@
-package com.bfxy;
+package com.pikaqiu;
 
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.dsl.ProducerType;
