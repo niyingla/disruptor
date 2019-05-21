@@ -39,7 +39,7 @@ public class Main {
                 new EventExceptionHandler(),
                 consumers);
 
-        //5 设置多个消费者的sequence序号 用于单独统计消费进度, 并且设置到ringbuffer中
+        //5 设置多个消费者的sequence序号 用于单独统计消费进度, 并且设置到ringBuffer中
         ringBuffer.addGatingSequences(workerPool.getWorkerSequences());
 
         //6 启动workerPool
