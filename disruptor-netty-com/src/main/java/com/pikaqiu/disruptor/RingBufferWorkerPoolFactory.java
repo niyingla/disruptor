@@ -36,7 +36,7 @@ public class RingBufferWorkerPoolFactory {
 		//1. 构建ringBuffer对象
 		this.ringBuffer = RingBuffer.create(type,
 				new EventFactory<TranslatorDataWapper>() {
-			@Override
+					@Override
 					public TranslatorDataWapper newInstance() {
 						return new TranslatorDataWapper();
 					}
@@ -46,9 +46,8 @@ public class RingBufferWorkerPoolFactory {
 		//2.设置序号栅栏
 		this.sequenceBarrier = this.ringBuffer.newBarrier();
 		//3.设置工作池
-		this.workerPool = new WorkerPool<TranslatorDataWapper>(this.ringBuffer,
-				this.sequenceBarrier, 
-				new EventExceptionHandler(), messageConsumers);
+		this.workerPool = new WorkerPool<TranslatorDataWapper>(
+				this.ringBuffer, this.sequenceBarrier, new EventExceptionHandler(), messageConsumers);
 		//4 把所构建的消费者置入池中
 		for(MessageConsumer mc : messageConsumers){
 			consumers.put(mc.getConsumerId(), mc);
@@ -89,7 +88,7 @@ public class RingBufferWorkerPoolFactory {
 	
 	
 	
-	
+
 	
 }
 
