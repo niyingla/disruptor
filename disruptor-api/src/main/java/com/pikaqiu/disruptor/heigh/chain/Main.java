@@ -18,7 +18,7 @@ public class Main {
 			
 		//构建一个线程池用于提交任务
 		ExecutorService es1 = Executors.newFixedThreadPool(1);
-		ExecutorService es2 = Executors.newFixedThreadPool(5); //大于等于监听数
+		ExecutorService es2 = Executors.newFixedThreadPool(5); //大于等于监听任务数
 		//1 构建Disruptor
 		Disruptor<Trade> disruptor = new Disruptor<Trade>(
 				new EventFactory<Trade>() {
@@ -91,7 +91,7 @@ public class Main {
 
 
 
-		latch.await();	//进行向下
+		latch.await();	//等待调用完成
 		
 		disruptor.shutdown();
 		es1.shutdown();
