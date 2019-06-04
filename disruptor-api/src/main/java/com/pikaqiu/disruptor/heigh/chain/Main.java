@@ -1,14 +1,14 @@
 package com.pikaqiu.disruptor.heigh.chain;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import com.lmax.disruptor.BusySpinWaitStrategy;
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
 
@@ -18,10 +18,11 @@ public class Main {
 			
 		//构建一个线程池用于提交任务
 		ExecutorService es1 = Executors.newFixedThreadPool(1);
-		ExecutorService es2 = Executors.newFixedThreadPool(5);
+		ExecutorService es2 = Executors.newFixedThreadPool(5); //大于等于监听数
 		//1 构建Disruptor
 		Disruptor<Trade> disruptor = new Disruptor<Trade>(
 				new EventFactory<Trade>() {
+					@Override
 					public Trade newInstance() {
 						return new Trade();
 					}
@@ -54,17 +55,17 @@ public class Main {
 		
 		
 		//2.3 菱形操作 (一)
-		/**
+
+/**
 		disruptor.handleEventsWith(new Handler1(), new Handler2())
 		.handleEventsWith(new Handler3());
-		*/
-		
+*/
+
 		//2.3 菱形操作 (二)
-		/**
-		EventHandlerGroup<Trade> ehGroup = disruptor.handleEventsWith(new Handler1(), new Handler2());
-		ehGroup.then(new Handler3());
-		*/
-		
+		//*
+		//EventHandlerGroup<Trade> ehGroup = disruptor.handleEventsWith(new Handler1(), new Handler2());
+		//ehGroup.then(new Handler3());
+
 		//2.4 六边形操作
 		Handler1 h1 = new Handler1();
 		Handler2 h2 = new Handler2();
@@ -72,21 +73,24 @@ public class Main {
 		Handler4 h4 = new Handler4();
 		Handler5 h5 = new Handler5();
 		disruptor.handleEventsWith(h1, h4);
+		//设置h2的执行顺序 位于h1后
 		disruptor.after(h1).handleEventsWith(h2);
 		disruptor.after(h4).handleEventsWith(h5);
 		disruptor.after(h2, h5).handleEventsWith(h3);
 
-		
 		//3 启动disruptor
 		RingBuffer<Trade> ringBuffer = disruptor.start();
 		
-		CountDownLatch latch = new CountDownLatch(1);
+		CountDownLatch latch = new CountDownLatch(2);
 		
 		long begin = System.currentTimeMillis();
-		
+
+		//提交任务
 		es1.submit(new TradePushlisher(latch, disruptor));
-		
-		
+		es1.submit(new TradePushlisher(latch, disruptor));
+
+
+
 		latch.await();	//进行向下
 		
 		disruptor.shutdown();

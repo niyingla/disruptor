@@ -3,6 +3,9 @@ package com.pikaqiu.disruptor.heigh.chain;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.WorkHandler;
 
+/**
+ * 两个接口 实现任何一个都可以
+ */
 public class Handler1 implements EventHandler<Trade>, WorkHandler<Trade>{
 
 	//EventHandler

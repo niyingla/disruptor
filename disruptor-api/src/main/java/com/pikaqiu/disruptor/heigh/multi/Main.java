@@ -13,8 +13,7 @@ public class Main {
 
         //1 创建RingBuffer
         RingBuffer<Order> ringBuffer =
-                RingBuffer.create(ProducerType.MULTI,
-                        new EventFactory<Order>() {
+                RingBuffer.create(ProducerType.MULTI, new EventFactory<Order>() {
                             @Override
                             public Order newInstance() {
                                 return new Order();

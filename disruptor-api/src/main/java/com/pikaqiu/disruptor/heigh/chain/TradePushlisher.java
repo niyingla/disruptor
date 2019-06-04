@@ -1,10 +1,10 @@
 package com.pikaqiu.disruptor.heigh.chain;
 
-import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-
 import com.lmax.disruptor.EventTranslator;
 import com.lmax.disruptor.dsl.Disruptor;
+
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 public class TradePushlisher implements Runnable {
 
@@ -18,6 +18,7 @@ public class TradePushlisher implements Runnable {
 		this.latch = latch;
 	}
 
+	@Override
 	public void run() {
 		
 		TradeEventTranslator eventTranslator = new TradeEventTranslator();
@@ -30,10 +31,14 @@ public class TradePushlisher implements Runnable {
 }
 
 
+/**
+ * 官方定义的方法  （也不是说优先级最高）
+ */
 class TradeEventTranslator implements EventTranslator<Trade> {
 
 	private Random random = new Random();
 
+	@Override
 	public void translateTo(Trade event, long sequence) {
 		this.generateTrade(event);
 	}
