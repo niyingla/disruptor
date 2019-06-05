@@ -12,15 +12,14 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         //1 创建RingBuffer
-        RingBuffer<Order> ringBuffer =
-                RingBuffer.create(ProducerType.MULTI, new EventFactory<Order>() {
-                            @Override
-                            public Order newInstance() {
-                                return new Order();
-                            }
-                        },
-                        1024 * 1024,
-                        new YieldingWaitStrategy());
+        RingBuffer<Order> ringBuffer = RingBuffer.create(ProducerType.MULTI, new EventFactory<Order>() {
+                    @Override
+                    public Order newInstance() {
+                        return new Order();
+                    }
+                },
+                1024 * 1024,
+                new YieldingWaitStrategy());
 
         //2 通过ringBuffer 创建一个屏障
         SequenceBarrier sequenceBarrier = ringBuffer.newBarrier();
