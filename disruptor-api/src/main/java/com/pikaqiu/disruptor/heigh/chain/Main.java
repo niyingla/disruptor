@@ -22,6 +22,7 @@ public class Main {
 		//1 构建Disruptor
 		Disruptor<Trade> disruptor = new Disruptor<Trade>(
 				new EventFactory<Trade>() {
+					@Override
 					public Trade newInstance() {
 						return new Trade();
 					}

@@ -18,11 +18,14 @@ public class TradePushlisher implements Runnable {
 		this.latch = latch;
 	}
 
+	@Override
 	public void run() {
-		
+		/**
+		 * 假设一次循环 是一个订单
+		 */
 		TradeEventTranslator eventTranslator = new TradeEventTranslator();
 		for(int i =0; i < PUBLISH_COUNT; i ++){
-			//新的提交任务的方式
+			//新的提交任务的方式（ringBuffer提交）
 			disruptor.publishEvent(eventTranslator);			
 		}
 		latch.countDown();
@@ -30,11 +33,21 @@ public class TradePushlisher implements Runnable {
 }
 
 
+/**
+ * disruptor直接提交任务  需要实现的方法
+ */
 class TradeEventTranslator implements EventTranslator<Trade> {
 
 	private Random random = new Random();
 
+	/**
+	 * 生产任务时调取的方法
+	 * @param event
+	 * @param sequence
+	 */
+	@Override
 	public void translateTo(Trade event, long sequence) {
+		//向空的对象中set内容 （同之前）
 		this.generateTrade(event);
 	}
 
