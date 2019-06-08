@@ -35,7 +35,7 @@ public class DisruptorSingle4Test {
             @Override
             public void run() {
                 RingBuffer<Data> ringBuffer = disruptor.getRingBuffer();
-                for (long i = 0; i < Constants.EVENT_NUM_OM; i++) {
+                for (long i = 0; i < Constants.EVENT_NUM_OHM; i++) {
                     long seq = ringBuffer.next();
                     Data data = ringBuffer.get(seq);
                     data.setId(i);

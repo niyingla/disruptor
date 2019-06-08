@@ -1,10 +1,10 @@
 package com.pikaqiu.disruptor.heigh.chain;
 
-import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-
 import com.lmax.disruptor.EventTranslator;
 import com.lmax.disruptor.dsl.Disruptor;
+
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 public class TradePushlisher implements Runnable {
 
@@ -25,7 +25,7 @@ public class TradePushlisher implements Runnable {
 		 */
 		TradeEventTranslator eventTranslator = new TradeEventTranslator();
 		for(int i =0; i < PUBLISH_COUNT; i ++){
-			//新的提交任务的方式（ringBuffer提交）
+			//新的提交任务的方式
 			disruptor.publishEvent(eventTranslator);			
 		}
 		latch.countDown();
@@ -33,9 +33,6 @@ public class TradePushlisher implements Runnable {
 }
 
 
-/**
- * disruptor直接提交任务  需要实现的方法
- */
 class TradeEventTranslator implements EventTranslator<Trade> {
 
 	private Random random = new Random();
@@ -47,7 +44,6 @@ class TradeEventTranslator implements EventTranslator<Trade> {
 	 */
 	@Override
 	public void translateTo(Trade event, long sequence) {
-		//向空的对象中set内容 （同之前）
 		this.generateTrade(event);
 	}
 

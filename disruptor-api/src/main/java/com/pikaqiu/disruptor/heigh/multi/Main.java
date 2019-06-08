@@ -12,16 +12,14 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         //1 创建RingBuffer
-        RingBuffer<Order> ringBuffer =
-                RingBuffer.create(ProducerType.MULTI,
-                        new EventFactory<Order>() {
-                            @Override
-                            public Order newInstance() {
-                                return new Order();
-                            }
-                        },
-                        1024 * 1024,
-                        new YieldingWaitStrategy());
+        RingBuffer<Order> ringBuffer = RingBuffer.create(ProducerType.MULTI, new EventFactory<Order>() {
+                    @Override
+                    public Order newInstance() {
+                        return new Order();
+                    }
+                },
+                1024 * 1024,
+                new YieldingWaitStrategy());
 
         //2 通过ringBuffer 创建一个屏障
         SequenceBarrier sequenceBarrier = ringBuffer.newBarrier();
@@ -33,13 +31,9 @@ public class Main {
         }
 
         //4 构建多消费者工作池
-        WorkerPool<Order> workerPool = new WorkerPool<Order>(
-                ringBuffer,
-                sequenceBarrier,
-                new EventExceptionHandler(),
-                consumers);
+        WorkerPool<Order> workerPool = new WorkerPool<Order>(ringBuffer, sequenceBarrier, new EventExceptionHandler(), consumers);
 
-        //5 设置多个消费者的sequence序号 用于单独统计消费进度, 并且设置到ringbuffer中
+        //5 设置多个消费者的sequence序号 用于单独统计消费进度, 并且设置到ringBuffer中
         ringBuffer.addGatingSequences(workerPool.getWorkerSequences());
 
         //6 启动workerPool
@@ -66,6 +60,7 @@ public class Main {
 
         Thread.sleep(2000);
         System.err.println("----------线程创建完毕，开始生产数据----------");
+        //开始执行
         latch.countDown();
 
         Thread.sleep(10000);
