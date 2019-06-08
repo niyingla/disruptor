@@ -23,3 +23,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/disruptor-api/.mvn/
+/disruptor-api/bin/
+/disruptor-netty-client/.mvn/
+/disruptor-netty-server/.mvn/
