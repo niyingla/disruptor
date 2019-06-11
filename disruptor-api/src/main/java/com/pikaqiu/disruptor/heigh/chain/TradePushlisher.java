@@ -20,7 +20,9 @@ public class TradePushlisher implements Runnable {
 
 	@Override
 	public void run() {
-		
+		/**
+		 * 假设一次循环 是一个订单
+		 */
 		TradeEventTranslator eventTranslator = new TradeEventTranslator();
 		for(int i =0; i < PUBLISH_COUNT; i ++){
 			//新的提交任务的方式
@@ -31,13 +33,15 @@ public class TradePushlisher implements Runnable {
 }
 
 
-/**
- * 官方定义的方法  （也不是说优先级最高）
- */
 class TradeEventTranslator implements EventTranslator<Trade> {
 
 	private Random random = new Random();
 
+	/**
+	 * 生产任务时调取的方法
+	 * @param event
+	 * @param sequence
+	 */
 	@Override
 	public void translateTo(Trade event, long sequence) {
 		this.generateTrade(event);
