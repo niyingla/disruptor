@@ -57,7 +57,12 @@ public class RingBufferWorkerPoolFactory {
 		//6 启动我们的工作池
 		this.workerPool.start(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()/2));
 	}
-	
+
+	/**
+	 * 获取一个消息生产者
+	 * @param producerId
+	 * @return
+	 */
 	public MessageProducer getMessageProducer(String producerId){
 		MessageProducer messageProducer = producers.get(producerId);
 		if(null == messageProducer) {

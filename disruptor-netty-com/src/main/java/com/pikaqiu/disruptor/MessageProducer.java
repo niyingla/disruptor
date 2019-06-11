@@ -15,7 +15,12 @@ public class MessageProducer {
 		this.producerId = producerId;
 		this.ringBuffer = ringBuffer;
 	}
-	
+
+	/**
+	 * 生成一条消息 并放入队列
+	 * @param data
+	 * @param ctx
+	 */
 	public void onData(TranslatorData data, ChannelHandlerContext ctx) {
 		long sequence = ringBuffer.next();
 		try {

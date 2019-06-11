@@ -18,9 +18,7 @@ public class MessageConsumerImpl4Client extends MessageConsumer {
 		ChannelHandlerContext ctx = event.getCtx();
 		//业务逻辑处理:
 		try {
-    		System.err.println("Client端: id= " + response.getId() 
-			+ ", name= " + response.getName()
-			+ ", message= " + response.getMessage());
+    		System.err.println("Client端: id= " + response.getId() + ", name= " + response.getName() + ", message= " + response.getMessage());
 		} finally {
 			ReferenceCountUtil.release(response);
 		}
