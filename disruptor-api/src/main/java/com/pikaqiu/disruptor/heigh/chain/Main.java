@@ -12,10 +12,10 @@ import java.util.concurrent.Executors;
 
 public class Main {
 
-	
+
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
-			
+
 		//构建一个线程池用于提交任务
 		ExecutorService es1 = Executors.newFixedThreadPool(1);
 		ExecutorService es2 = Executors.newFixedThreadPool(5); //大于等于监听任务数
@@ -31,10 +31,10 @@ public class Main {
 				es2,
 				ProducerType.SINGLE,
 				new BusySpinWaitStrategy());
-		
-		
+
+
 		//2 把消费者设置到Disruptor中 handleEventsWith
-		
+
 		//2.1 串行操作：
 		/**
 		disruptor
@@ -42,8 +42,8 @@ public class Main {
 		.handleEventsWith(new Handler2())
 		.handleEventsWith(new Handler3());
 		*/
-		
-		
+
+
 		//2.2 并行操作: 可以有两种方式去进行
 		//1 handleEventsWith方法 添加多个handler实现即可
 		//2 handleEventsWith方法 分别进行调用
@@ -52,8 +52,8 @@ public class Main {
 //		disruptor.handleEventsWith(new Handler2());
 //		disruptor.handleEventsWith(new Handler3());
 		*/
-		
-		
+
+
 		//2.3 菱形操作 (一)
 
 /**
@@ -80,24 +80,24 @@ public class Main {
 
 		//3 启动disruptor
 		RingBuffer<Trade> ringBuffer = disruptor.start();
-		
-		CountDownLatch latch = new CountDownLatch(2);
-		
+
+		CountDownLatch latch = new CountDownLatch(1);
+
 		long begin = System.currentTimeMillis();
 
-		//提交任务
+		//提交任务执行器 （每一个事件都会走一遍）
 		es1.submit(new TradePushlisher(latch, disruptor));
 		es1.submit(new TradePushlisher(latch, disruptor));
 
 
 
 		latch.await();	//等待调用完成
-		
+
 		disruptor.shutdown();
 		es1.shutdown();
 		es2.shutdown();
 		System.err.println("总耗时: " + (System.currentTimeMillis() - begin));
-		
-		
+
+
 	}
 }
