@@ -8,6 +8,9 @@ import com.lmax.disruptor.dsl.ProducerType;
 
 import java.util.concurrent.Executors;
 
+/**
+ * 测试同样 1000 0000
+ */
 public class DisruptorSingle4Test {
 
     public static void main(String[] args) {
@@ -21,7 +24,7 @@ public class DisruptorSingle4Test {
 				},
                 ringBufferSize,
                 Executors.newSingleThreadExecutor(),
-                ProducerType.SINGLE, 
+                ProducerType.SINGLE,
                 //new BlockingWaitStrategy()
                 new YieldingWaitStrategy()
         		);
