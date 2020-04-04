@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ *   * 单个服务器上RingBuffer数量不建议超过cpu数
+ *
  *	 RingBuffer环形队列  内容手动set 对象由队列创建 生产者-》投递-》消费者
  *
  *  多线程之间传递数据的环形buffer 拥有一个序号 指向下一个可用元素
