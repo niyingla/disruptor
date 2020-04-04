@@ -22,6 +22,7 @@ public class NettyServerApplication {
 		//创建四个消费者
 		MessageConsumer[] conusmers = new MessageConsumer[4];
 		for(int i =0; i < conusmers.length; i++) {
+			//创建环形队列信息消费者集合 当存在可消费消息时会调用消费者的onEvent方法
 			MessageConsumer messageConsumer = new MessageConsumerImpl4Server("code:serverId:" + i);
 			conusmers[i] = messageConsumer;
 		}
