@@ -60,6 +60,9 @@ public class NettyClient {
 		}
 	}
 
+	/**
+	 * 首先主动发起消息
+	 */
 	public void sendData(){
 
 		for(int i =0; i <10; i++){

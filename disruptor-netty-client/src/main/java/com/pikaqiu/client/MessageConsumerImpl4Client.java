@@ -12,6 +12,11 @@ public class MessageConsumerImpl4Client extends MessageConsumer {
 		super(consumerId);
 	}
 
+	/**
+	 * 处理发送过来的消息
+	 * @param event
+	 * @throws Exception
+	 */
 	@Override
 	public void onEvent(TranslatorDataWapper event) throws Exception {
 		TranslatorData response = event.getData();
