@@ -25,6 +25,8 @@ public class MessageConsumerImpl4Client extends MessageConsumer {
 		try {
     		System.err.println("Client端: id= " + response.getId() + ", name= " + response.getName() + ", message= " + response.getMessage());
 		} finally {
+
+			//最后手动释放消息
 			ReferenceCountUtil.release(response);
 		}
 	}
