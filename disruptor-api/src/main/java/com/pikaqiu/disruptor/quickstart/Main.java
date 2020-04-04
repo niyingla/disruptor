@@ -11,17 +11,17 @@ import java.util.concurrent.Executors;
 
 public class Main {
 
-	
-	
+
+
 	public static void main(String[] args) {
-		
-		
+
+
 		// 参数准备工作
 		OrderEventFactory orderEventFactory = new OrderEventFactory();
 		int ringBufferSize = 4;
 		// Runtime.getRuntime().availableProcessors() 获取cpu数
 		ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-		
+
 		/**
 		 * 1 eventFactory: 消息(event)工厂对象
 		 * 2 ringBufferSize: 容器的长度 （有界容器）
@@ -35,27 +35,28 @@ public class Main {
 				executor,
 				ProducerType.SINGLE,
 				new BlockingWaitStrategy());
-		
+
 		//2. 添加消费者的监听 (构建disruptor 与 消费者的一个关联关系)
 		disruptor.handleEventsWith(new OrderEventHandler());
-		
+
 		//3. 启动disruptor
 		disruptor.start();
-		
+
 		//4. 获取实际存储数据的容器: RingBuffer
 		RingBuffer<OrderEvent> ringBuffer = disruptor.getRingBuffer();
-		
+		//5. 创建消息生产者
 		OrderEventProducer producer = new OrderEventProducer(ringBuffer);
-		
+		//获取八个字节的byteBuffer
 		ByteBuffer bb = ByteBuffer.allocate(8);
-		
+		//循环设置值
 		for(long i = 0 ; i < 50000; i ++){
 			bb.putLong(0, i);
+			//发布数据
 			producer.sendData(bb);
 		}
-		
+
 		disruptor.shutdown();
 		executor.shutdown();
-		
+
 	}
 }
