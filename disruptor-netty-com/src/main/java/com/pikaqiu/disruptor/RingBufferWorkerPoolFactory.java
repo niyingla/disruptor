@@ -11,31 +11,36 @@ import java.util.concurrent.Executors;
 public class RingBufferWorkerPoolFactory {
 
 	private static class SingletonHolder {
+		//创建工厂类
 		static final RingBufferWorkerPoolFactory instance = new RingBufferWorkerPoolFactory();
 	}
-	
+
 	private RingBufferWorkerPoolFactory(){
-		
+
 	}
-	
+
 	public static RingBufferWorkerPoolFactory getInstance() {
 		return SingletonHolder.instance;
 	}
-	
+
 	private static Map<String, MessageProducer> producers = new ConcurrentHashMap<String, MessageProducer>();
-	
+
 	private static Map<String, MessageConsumer> consumers = new ConcurrentHashMap<String, MessageConsumer>();
 
 	private RingBuffer<TranslatorDataWapper> ringBuffer;
-	
+
 	private SequenceBarrier sequenceBarrier;
-	
+
 	private WorkerPool<TranslatorDataWapper> workerPool;
-	
+
 	public void initAndStart(ProducerType type, int bufferSize, WaitStrategy waitStrategy, MessageConsumer[] messageConsumers) {
 		//1. 构建ringBuffer对象
 		this.ringBuffer = RingBuffer.create(type,
 				new EventFactory<TranslatorDataWapper>() {
+					/**
+					 * 设置获取数据对象方法
+					 * @return
+					 */
 					@Override
 					public TranslatorDataWapper newInstance() {
 						return new TranslatorDataWapper();
@@ -46,8 +51,7 @@ public class RingBufferWorkerPoolFactory {
 		//2.设置序号栅栏
 		this.sequenceBarrier = this.ringBuffer.newBarrier();
 		//3.设置工作池
-		this.workerPool = new WorkerPool<TranslatorDataWapper>(
-				this.ringBuffer, this.sequenceBarrier, new EventExceptionHandler(), messageConsumers);
+		this.workerPool = new WorkerPool<TranslatorDataWapper>(this.ringBuffer, this.sequenceBarrier, new EventExceptionHandler(), messageConsumers);
 		//4 把所构建的消费者置入池中
 		for(MessageConsumer mc : messageConsumers){
 			consumers.put(mc.getConsumerId(), mc);
@@ -59,7 +63,7 @@ public class RingBufferWorkerPoolFactory {
 	}
 
 	/**
-	 * 获取一个消息生产者
+	 * 获取一个消息生产者（不存在时创建一个）
 	 * @param producerId
 	 * @return
 	 */
@@ -71,8 +75,8 @@ public class RingBufferWorkerPoolFactory {
 		}
 		return messageProducer;
 	}
-	
-	
+
+
 	/**
 	 * 异常静态类
 	 * @author xiaoye
@@ -90,11 +94,11 @@ public class RingBufferWorkerPoolFactory {
 		public void handleOnShutdownException(Throwable ex) {
 		}
 	}
-	
-	
-	
 
-	
+
+
+
+
 }
 
 

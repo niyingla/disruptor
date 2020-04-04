@@ -3,24 +3,23 @@ package com.pikaqiu.disruptor;
 import com.lmax.disruptor.WorkHandler;
 import com.pikaqiu.entity.TranslatorDataWapper;
 
-/** 
+/**
  * @author xiaoye
- *
  */
 public abstract class MessageConsumer implements WorkHandler<TranslatorDataWapper> {
 
-	protected String consumerId;
-	
-	public MessageConsumer(String consumerId) {
-		this.consumerId = consumerId;
-	}
+    protected String consumerId;
 
-	public	 String getConsumerId() {
-		return consumerId;
-	}
+    public MessageConsumer(String consumerId) {
+        this.consumerId = consumerId;
+    }
 
-	public void setConsumerId(String consumerId) {
-		this.consumerId = consumerId;
-	}
+    public String getConsumerId() {
+        return consumerId;
+    }
+
+    public void setConsumerId(String consumerId) {
+        this.consumerId = consumerId;
+    }
 
 }
