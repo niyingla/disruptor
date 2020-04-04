@@ -43,17 +43,16 @@ public class Main {
 
         for (int i = 0; i < 100; i++) {
             final Producer producer = new Producer(ringBuffer);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        latch.await();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    for (int j = 0; j < 100; j++) {
-                        producer.sendData(UUID.randomUUID().toString());
-                    }
+            new Thread(() -> {
+                try {
+                    //同步启动100个线程 生成数据
+                    latch.await();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                for (int j = 0; j < 100; j++) {
+                    //传输需要设置的数据
+                    producer.sendData(UUID.randomUUID().toString());
                 }
             }).start();
         }
