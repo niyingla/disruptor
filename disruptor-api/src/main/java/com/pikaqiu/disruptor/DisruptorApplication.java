@@ -40,6 +40,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 	workProcessor 确保每个Sequence只能被一个processor消费
  *
  * 	消费逻辑编写于EventHandler
+ *
+ * 	特性
+ * 	1 高效队列
+ * 	2 策略顺序执行
  */
 @SpringBootApplication
 public class DisruptorApplication {
