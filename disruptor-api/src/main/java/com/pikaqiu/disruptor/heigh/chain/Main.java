@@ -81,7 +81,7 @@ public class Main {
 		//3 启动disruptor
 		RingBuffer<Trade> ringBuffer = disruptor.start();
 
-		CountDownLatch latch = new CountDownLatch(1);
+		CountDownLatch latch = new CountDownLatch(2);
 
 		long begin = System.currentTimeMillis();
 
