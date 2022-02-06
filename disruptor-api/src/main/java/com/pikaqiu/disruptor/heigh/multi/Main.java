@@ -12,7 +12,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         //1 创建RingBuffer
-        RingBuffer<Order> ringBuffer = RingBuffer.create(ProducerType.MULTI, new EventFactory<Order>() {
+        RingBuffer<Order> ringBuffer = RingBuffer.create(
+                ProducerType.MULTI,
+                new EventFactory<Order>() {
                     @Override
                     public Order newInstance() {
                         return new Order();
