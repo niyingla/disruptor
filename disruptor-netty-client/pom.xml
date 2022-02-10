@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.1.RELEASE</version>
+		<version>2.0.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -35,7 +35,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.pikaqiu</groupId>
 			<artifactId>disruptor-netty-com</artifactId>
@@ -56,7 +56,7 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 
